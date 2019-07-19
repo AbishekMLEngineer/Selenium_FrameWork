@@ -1,0 +1,86 @@
+Rasberry PI:
+Rasberry from fruit name and PI from python
+The popular credit size computer which not only famous for its size but also for performance.
+It can be almost used as a functional computer by running several versions of linux operatig systems.
+
+History :
+Broadcom(a company that manfacture smartphones joined hands with university of Cambridge to cofound the RPI foundation.
+First it was designed to make kids learn programming and to make access of functional computers to the citizens of 3rd world countries 
+
+
+Raspberry Pi 3 - Model B Technical Specification
+Broadcom BCM2387 chipset 
+1.2GHz Quad-Core ARM Cortex-A53
+802.11 bgn Wireless LAN and Bluetooth 4.1 (Bluetooth Classic and LE)
+1GB RAM
+64 Bit CPU
+4 x USB ports
+4 pole Stereo output and Composite video port
+Full size HDMI
+10/100 BaseT Ethernet socketbr
+CSI camera port for connecting the Raspberry Pi camera
+DSI display port for connecting the Raspberry Pi touch screen display
+Micro SD port for loading your operating system and storing data
+Micro USB power source
+
+The specific sensors and components here were chosen after considering a number of factors:
+
+1.Availability
+2.Cost
+3.Linux/Python support
+4.Reliability
+5.Accuracy
+6.Ease of use
+
+and if we choose different components, we will probably need to also find (or write) a Python library that works with them.
+
+
+On the Software Side 
+The Oracle Raspberry Pi Weather Station software. Clone the GitHub repository by opening a Terminal window and type
+git clone https://github.com/RaspberryPiFoundation/weather-station
+
+The BME280 Python library:
+sudo pip3 install RPi.bme280
+
+The MariaDB database server software:
+sudo apt-get install -y mariadb-server mariadb-client libmariadbclient-dev
+sudo pip3 install mysqlclient
+
+Now for measuring Humidity, temperature and pressure :
+
+The BME280 sensor is a digital sensor that can measure temperature, humidity, and atmospheric pressure.
+One thing to check is that the I2C address is correct: for the Adafruit models it is 0x77  
+but other versions can have different addresses (0x76 is a common alternative).
+
+Wiring up the sensor
+Connect up the sensor to your Pi
+
+
+Create a new Python file, save it as /home/pi/weather-station/bme280_sensor.py, and add the code to it:
+Sample Code :-
+
+import bme280
+import smbus2
+from time import sleep
+
+port = 1
+address = 0x77 # Adafruit BME280 address. Other BME280s may be different
+bus = smbus2.SMBus(port)
+
+bme280.load_calibration_params(bus,address)
+
+while True:
+    bme280_data = bme280.sample(bus,address)
+    humidity  = bme280_data.humidity
+    pressure  = bme280_data.pressure
+    ambient_temperature = bme280_data.temperature
+    print(humidity, pressure, ambient_temperature)
+    sleep(1)
+
+
+Ground temperature
+The BME280 will report the air temperature, but this can be significantly warmer than the ground, particularly if it is frosty. 
+A thermal probe stuck into the soil is a useful supplemental temperature measurement and can be used to indicate the presence of 
+ice/frost in winter. The Dallas DS18B20 temperature sensor comes in many forms including a waterproof thermal probe version, and this 
+is the sensor used on the Oracle Raspberry Pi Weather Station.
+

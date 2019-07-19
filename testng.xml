@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<listeners>
+	<listener class-name="Listeners.MethodTransformer.java"></listener>
+</listeners>
+  <test name="RetryFailedCases">
+    <classes>
+      <class name="com.qa.base.TestBase"/>
+      <class name="testClasses.LoginPageTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
