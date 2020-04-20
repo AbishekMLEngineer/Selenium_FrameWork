@@ -14,7 +14,8 @@ import org.testng.annotations.Test;
 public class WordsCount {
 	
 	int arr[] = new int[]{1, 5, 7, -1, 5} ;
-	//Means to check the sum of 2 no.s in an array is equal to the desired sum and to count the occurence of the pairs
+	//Means to check the sum of 2 no.s in an array is equal to the desired sum and 
+	//to count the occurence of the pairs
 	public int getPairCOuntInArray(int n , int sum){
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
 		for(int i=0;i<n;i++){

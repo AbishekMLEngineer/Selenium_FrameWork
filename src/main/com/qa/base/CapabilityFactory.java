@@ -10,6 +10,8 @@ public class CapabilityFactory {
 	        else
 	            capabilities = OptionsManager.getChromeOptions();
 		*/
+			 
+		return capabilities;
 		return capabilities;
 	}
 	

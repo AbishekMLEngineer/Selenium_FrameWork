@@ -1,5 +1,7 @@
 package com.qa.base;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,11 +41,17 @@ public class TestBase {
 	}
 	
 	
+	public void launchBrowserUsingWebDriverManager(){
+		WebDriverManager.chromedriver().setup();	
+	}
+	
+	
+	
 	
 	public void initialization(){
 		String browserName = pro.getProperty("browser");
 		if (browserName.equalsIgnoreCase("Chrome")){
-			System.setProperty("webdriver.chrome.driver","/home/user/Downloads/driver/chromedriver");
+			System.setProperty("webdriver.chrome.driver","D:/SeleniumFramework/driver/chromedriver.exe");
 			driver = new ChromeDriver();
 		}
 		if (browserName.equalsIgnoreCase("I.E")){
